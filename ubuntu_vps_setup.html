@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ubuntu VPS 初期設定代行 | 株式会社ヤマトダイワ</title>
+  <meta name="description" content="Ubuntu VPSの初期設定をプロが代行。SSH設定・ファイアウォール・セキュリティ強化まで、安全なサーバー環境を構築します。" />
+  <link rel="stylesheet" href="./CommercialActivity/Services/UbuntuVPS_Setup/UbuntuVPS_SetupServicePage.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav class="nav">
+  <div class="nav__inner">
+
+    <a href="#" class="nav__logo">
+      <div class="logo-mark" role="img" aria-label="株式会社やまとダイワ">
+        <span class="logo-mark__kana">やまと</span>
+        <span class="logo-mark__kanji">大和</span>
+        <span class="logo-mark__kata">ダイワ</span>
+      </div>
+      <div class="nav__brand-text">
+        <span class="nav__brand-top">Ubuntu 24 VPS</span>
+        <span class="nav__brand-bottom">初期設定代行</span>
+      </div>
+    </a>
+
+    <ul class="nav__links">
+      <li><a href="#required">主要作業</a></li>
+      <li><a href="#options">オプション</a></li>
+      <li><a href="#flow">導入の流れ</a></li>
+      <li><a href="#area">訪問可能なエリア</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ul>
+
+    <div class="nav__actions">
+      <a href="https://forms.gle/agfsLsqEhjm7JnG78" class="nav__btn-secondary">問い合わせ</a>
+      <a href="https://forms.gle/nW5vjAwxWC3CvA8W7" class="nav__btn-primary">申し込み</a>
+    </div>
+
+    <button class="nav__hamburger" id="navHamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__drawer" id="navDrawer" aria-hidden="true">
+    <ul class="nav__drawer-links">
+      <li><a href="#required">主要作業</a></li>
+      <li><a href="#options">オプション</a></li>
+      <li><a href="#flow">導入の流れ</a></li>
+      <li><a href="#area">訪問可能なエリア</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ul>
+    <div class="nav__drawer-actions">
+      <a href="https://forms.gle/agfsLsqEhjm7JnG78" class="nav__btn-secondary nav__btn--full">問い合わせ</a>
+      <a href="https://forms.gle/nW5vjAwxWC3CvA8W7" class="nav__btn-primary nav__btn--full">申し込み</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero" id="top">
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero__inner">
+
+      <div class="hero__content">
+        <div class="hero__badge">
+          <span class="hero__badge-dot" aria-hidden="true"></span>
+          Ubuntu 24.04 LTS 対応
+        </div>
+        <h1 class="hero__heading">
+          Ubuntu VPSを、<em>最初から</em><br>
+          安全に立ち上げる。
+        </h1>
+        <p class="hero__sub">
+          VPSの初期設定には、高度なセキュリティ知識と実務経験が不可欠です。
+          設定の誤りは深刻なリスクに直結するため、初めて本番サーバーを構築する場合は特に注意が必要です。
+          弊社では、以下の必須項目をはじめとするセキュリティ設定を一括して代行いたします。
+        </p>
+        <div class="hero__actions">
+          <a href="https://forms.gle/nW5vjAwxWC3CvA8W7" class="btn-primary">申し込み →</a>
+          <a href="https://forms.gle/agfsLsqEhjm7JnG78" class="btn-ghost">問い合わせ</a>
+        </div>
+
+        <div class="hero__providers">
+          <p class="hero__providers-label">対応プロバイダー</p>
+          <div class="hero__providers-list">
+            <div class="provider-badge"><span aria-hidden="true">🟠</span> XServer VPS</div>
+            <div class="provider-badge"><span aria-hidden="true">🟢</span> ConoHa VPS</div>
+          </div>
+          <div class="hero__other-provider">
+            <a href="#faq-providers">他のプロバイダーについて</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up">
+        <div class="hero__terminal">
+          <div class="terminal__bar">
+            <div class="terminal__dots" aria-hidden="true">
+              <div class="terminal__dot terminal__dot--red"></div>
+              <div class="terminal__dot terminal__dot--yel"></div>
+              <div class="terminal__dot terminal__dot--grn"></div>
+            </div>
+            <span class="terminal__title">ubuntu-vps — bash</span>
+          </div>
+          <div class="terminal__body" aria-hidden="true">
+            <div class="t-line" style="opacity:0;transition:opacity .4s"><span class="t-prompt">user@vps</span><span class="t-cmd">:~$ </span><span class="t-arg">adduser</span> deploy</div>
+            <div class="t-line" style="opacity:0;transition:opacity .4s"><span class="t-ok">✓ 管理ユーザー作成完了</span></div>
+            <div class="t-line" style="opacity:0;transition:opacity .4s;margin-top:8px"><span class="t-prompt">user@vps</span><span class="t-cmd">:~$ </span><span class="t-arg">ufw</span> enable</div>
+            <div class="t-line" style="opacity:0;transition:opacity .4s"><span class="t-ok">✓ ファイアウォール有効化</span></div>
+            <div class="t-line" style="opacity:0;transition:opacity .4s;margin-top:8px"><span class="t-prompt">user@vps</span><span class="t-cmd">:~$ </span><span class="t-arg">sed</span> -i 's/PermitRootLogin yes/no/' /etc/ssh/sshd_config</div>
+            <div class="t-line" style="opacity:0;transition:opacity .4s"><span class="t-ok">✓ rootログイン無効化</span></div>
+            <div class="t-line" style="opacity:0;transition:opacity .4s;margin-top:8px"><span class="t-prompt">user@vps</span><span class="t-cmd">:~$ </span><span class="t-comment"># セットアップ完了</span></div>
+            <div class="t-line" style="opacity:0;transition:opacity .4s"><span class="t-cursor"></span></div>
+          </div>
+          <p class="terminal__disclaimer">
+            ※ このコンソールのアニメーションは装飾目的です。表示されているコマンドは実際の作業内容と異なる場合があります。
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     主な作業
+============================================================ -->
+<section class="section section--alt" id="required">
+  <div class="container">
+    <div class="required__intro">
+      <div>
+        <div class="section-label fade-up">必須セットアップ</div>
+        <h2 class="section-title fade-up"><em>主な作業</em></h2>
+      </div>
+      <p class="section-subtitle fade-up">
+        いずれの項目も、サーバー運用を始める前に必ず実施すべきセキュリティ・環境整備です。
+        これらはオプションではなく、すべての作業に標準で含まれています。
+      </p>
+    </div>
+
+    <div class="required__cards">
+
+      <div class="req-card fade-up fade-up-delay-1">
+        <div class="req-card__icon" aria-hidden="true">🔄</div>
+        <h3 class="req-card__title">システムアップデート</h3>
+        <p class="req-card__desc">初期状態のVPSには脆弱性を含む未更新パッケージが残っている場合があります。すべてのパッケージを最新化し、既知のセキュリティリスクを解消した状態から作業を開始します。</p>
+      </div>
+
+      <div class="req-card fade-up fade-up-delay-2">
+        <div class="req-card__icon" aria-hidden="true">👤</div>
+        <h3 class="req-card__title">管理ユーザーの作成</h3>
+        <p class="req-card__desc">rootユーザーによる直接操作は、コマンドのミスがシステム全体の破壊に直結する危険があります。権限を制御した専用の管理ユーザーを作成することで、意図しない操作ミスを防ぎます。</p>
+      </div>
+
+      <div class="req-card fade-up fade-up-delay-3">
+        <div class="req-card__icon" aria-hidden="true">🚫</div>
+        <h3 class="req-card__title">rootログインの無効化</h3>
+        <p class="req-card__desc">SSH経由でのrootダイレクトログインを禁止します。rootアカウントは自動化された攻撃ツールの標的になりやすく、侵害時の被害は最大となります。この設定で攻撃の入口を根本から塞ぎます。</p>
+      </div>
+
+      <div class="req-card fade-up fade-up-delay-4">
+        <div class="req-card__icon" aria-hidden="true">🔥</div>
+        <h3 class="req-card__title">ファイアウォール設定（UFW）</h3>
+        <p class="req-card__desc">不要なTCPポートをすべて遮断し、必要な通信のみを明示的に許可します。デフォルト拒否ポリシーを採用することで、想定外の外部アクセスを防ぎ、攻撃対象領域を最小化します。</p>
+      </div>
+
+      <div class="req-card fade-up fade-up-delay-1">
+        <div class="req-card__icon" aria-hidden="true">🔌</div>
+        <h3 class="req-card__title">SSHポートの変更</h3>
+        <p class="req-card__desc">デフォルトの22番ポートはインターネット上の自動スキャナーに常時狙われています。ポートを変更するだけで、大多数の無差別な不正アクセス試行を遮断し、ログのノイズも削減できます。</p>
+      </div>
+
+      <div class="req-card fade-up fade-up-delay-2">
+        <div class="req-card__icon" aria-hidden="true">🔑</div>
+        <h3 class="req-card__title">SSHキー認証の設定</h3>
+        <p class="req-card__desc">パスワード認証は、強固なパスワードを使っていても総当たり攻撃・辞書攻撃・フィッシングのリスクが残ります。公開鍵認証への切り替えにより、これらの脅威を根本的に無効化します。設定完了後、パスワード認証は完全に無効化します。</p>
+      </div>
+
+      <div class="req-card fade-up fade-up-delay-3">
+        <div class="req-card__icon" aria-hidden="true">🛡️</div>
+        <h3 class="req-card__title">セキュリティパッケージの自動更新</h3>
+        <p class="req-card__desc">新たな脆弱性は日々発見されます。<code style="font-family:var(--font-mono);font-size:13px;background:var(--border-soft);padding:1px 5px;border-radius:3px">unattended-upgrades</code> を設定し、セキュリティパッチを自動適用することで、常時監視なしでも最低限の安全性を維持できます。</p>
+      </div>
+
+      <div class="req-card fade-up fade-up-delay-4">
+        <div class="req-card__icon" aria-hidden="true">🔐</div>
+        <h3 class="req-card__title">パスワードログインの無効化</h3>
+        <p class="req-card__desc">SSHキー認証の設定後、パスワードによるログインを完全に禁止します。鍵認証と共存させるのではなく、パスワード認証を根本から排除することで確実な防御を実現します。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     オプション・料金
+============================================================ -->
+<section class="section" id="options">
+  <div class="container">
+    <div class="options__intro">
+      <div class="section-label fade-up">料金・オプション一覧</div>
+      <h2 class="section-title fade-up"><em>必須項目・オプション</em></h2>
+      <p class="section-subtitle fade-up" style="margin-bottom:32px">
+        必須項目に加えて、用途・規模に応じたオプションを自由に組み合わせてご依頼いただけます。
+      </p>
+      <div class="admonition fade-up">
+        <span class="admonition__icon" aria-hidden="true">⚠️</span>
+        <div>
+          <p class="admonition__title">注意事項</p>
+          <ul class="admonition__list">
+            <li>
+              サーバー代はプロバイダーやスペック・ご利用期間によって異なり、弊社のサービス料金には含まれておりません。各プロバイダーのサイトにてご確認ください。
+              <ul class="admonition__sublist">
+                <li><a href="https://vps.xserver.ne.jp/" target="_blank" rel="noopener">XServer VPS</a></li>
+                <li><a href="https://vps.conoha.jp/pricing/" target="_blank" rel="noopener">ConoHa VPS</a></li>
+              </ul>
+            </li>
+            <li>パスワードやSSHキーの共有・保管にはパスワードマネージャーの導入が必要です（KeePass等の同等ソフトウェア）。社内でのソフトウェア導入に制限がある場合は、パスワードマネージャーをインストールできる環境を事前にご準備ください。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <table class="options-table">
+        <thead>
+          <tr>
+            <th style="width:32%">設定項目</th>
+            <th style="width:12%">区分</th>
+            <th style="width:14%">料金（税込）</th>
+            <th>概要・効果</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="category-row"><td colspan="4">▸ 必須セットアップ</td></tr>
+          <tr>
+            <td>VPSスペック選択支援</td>
+            <td><span class="badge badge--required">● 必須</span></td>
+            <td class="price-cell">—</td>
+            <td class="desc-cell">用途・予算に合ったVPSプランの選定をサポートします</td>
+          </tr>
+          <tr>
+            <td>ソフトウェア更新</td>
+            <td><span class="badge badge--required">● 必須</span></td>
+            <td class="price-cell">—</td>
+            <td class="desc-cell">全パッケージを最新化し、既知の脆弱性を解消します</td>
+          </tr>
+          <tr>
+            <td>日常管理専用ユーザー作成</td>
+            <td><span class="badge badge--required">● 必須</span></td>
+            <td class="price-cell">—</td>
+            <td class="desc-cell">root以外の管理ユーザーを作成し、安全な運用体制を整備します</td>
+          </tr>
+          <tr>
+            <td>SSH認証設定</td>
+            <td><span class="badge badge--required">● 必須</span></td>
+            <td class="price-cell">—</td>
+            <td class="desc-cell">公開鍵認証を設定し、鍵ベースの安全な接続環境を構築します</td>
+          </tr>
+          <tr>
+            <td>パスワードログインの無効化</td>
+            <td><span class="badge badge--required">● 必須</span></td>
+            <td class="price-cell">—</td>
+            <td class="desc-cell">パスワード認証を完全に無効化し、総当たり攻撃のリスクを排除します</td>
+          </tr>
+          <tr>
+            <td>ファイアウォール設定</td>
+            <td><span class="badge badge--required">● 必須</span></td>
+            <td class="price-cell">—</td>
+            <td class="desc-cell">不要なTCPポートをすべて遮断し、必要な通信のみを許可します</td>
+          </tr>
+          <tr>
+            <td>デフォルトSSHポート番号変更</td>
+            <td><span class="badge badge--required">● 必須</span></td>
+            <td class="price-cell">—</td>
+            <td class="desc-cell">22番ポートから変更し、自動スキャンによる不正アクセス試行を大幅に削減します</td>
+          </tr>
+          <tr>
+            <td>セキュリティパッケージの自動更新</td>
+            <td><span class="badge badge--required">● 必須</span></td>
+            <td class="price-cell">—</td>
+            <td class="desc-cell">セキュリティパッチを自動適用し、継続的な安全性を維持します</td>
+          </tr>
+          <tr class="sum-row">
+            <td colspan="2">必須セットアップ　合計</td>
+            <td colspan="2" class="price-cell--total">¥40,000（税込）</td>
+          </tr>
+
+          <tr class="category-row"><td colspan="4">▸ 旅費交通費（都内）</td></tr>
+          <tr>
+            <td>100%オンサイト作業</td>
+            <td><span class="badge badge--travel">○ 任意</span></td>
+            <td class="price-cell">¥25,000</td>
+            <td class="desc-cell">リモートではなく、御社オフィスへ訪問してすべての作業を実施します</td>
+          </tr>
+
+          <tr class="category-row"><td colspan="4">▸ オプション</td></tr>
+          <tr>
+            <td>fail2ban 導入</td>
+            <td><span class="badge badge--optional">○ 任意</span></td>
+            <td class="price-cell">¥5,000</td>
+            <td class="desc-cell">不正アクセス試行の自動検知・IPブロック機能を追加します</td>
+          </tr>
+          <tr>
+            <td>SSL証明書 Let's Encrypt 取得・設定・更新案内<br><small style="color:var(--slate-light);font-family:var(--font-mono);font-size:11px">XServer VPS 限定</small></td>
+            <td><span class="badge badge--optional">○ 任意</span></td>
+            <td class="price-cell">¥20,000</td>
+            <td class="desc-cell">無料SSL証明書の取得・設定・自動更新を行います</td>
+          </tr>
+          <tr>
+            <td>Docker 導入</td>
+            <td><span class="badge badge--optional">○ 任意</span></td>
+            <td class="price-cell">¥10,000</td>
+            <td class="desc-cell">Dockerのインストールおよび動作確認を行います</td>
+          </tr>
+          <tr>
+            <td>追加端末からのアクセス設定（1台）</td>
+            <td><span class="badge badge--optional">○ 任意</span></td>
+            <td class="price-cell">¥3,000</td>
+            <td class="desc-cell">納品後、追加で1台の端末からのSSHアクセスを設定します</td>
+          </tr>
+
+          <tr class="category-row"><td colspan="4">▸ 旅費交通費等（地方：神奈川県・千葉県・埼玉県）</td></tr>
+          <tr>
+            <td>納品訪問のみ</td>
+            <td><span class="badge badge--travel">○ 任意</span></td>
+            <td class="price-cell">¥10,000</td>
+            <td class="desc-cell">リモート作業完了後、納品・説明のみ御社オフィスへ訪問します</td>
+          </tr>
+          <tr>
+            <td>100%オンサイト作業</td>
+            <td><span class="badge badge--travel">○ 任意</span></td>
+            <td class="price-cell">¥50,000</td>
+            <td class="desc-cell">御社オフィスへ訪問してすべての作業を実施します（地方エリア）</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     導入の流れ
+============================================================ -->
+<section class="section section--alt" id="flow">
+  <div class="container">
+    <div class="flow__header">
+      <div>
+        <div class="section-label fade-up">導入の流れ</div>
+        <h2 class="section-title fade-up" style="font-size:clamp(28px,3.2vw,42px)">申し込みから<em>完了まで</em></h2>
+      </div>
+      <p class="section-subtitle fade-up">
+        初回のご連絡から設定完了まで、全ステップを丁寧にサポートします。
+      </p>
+    </div>
+
+    <div class="flow__timeline">
+
+      <div class="flow-step fade-up">
+        <div class="flow-step__left">
+          <div class="flow-step__num">01</div>
+          <div class="flow-step__line"></div>
+        </div>
+        <div class="flow-step__body">
+          <h3 class="flow-step__title">お申し込み</h3>
+          <p class="flow-step__desc">
+            <a href="https://forms.gle/nW5vjAwxWC3CvA8W7" style="color:var(--orange);text-decoration:underline;text-underline-offset:2px">こちら</a>からお申し込みいただけます。ご不明な点がございましたら、お気軽に<a href="https://forms.gle/agfsLsqEhjm7JnG78" style="color:var(--orange);text-decoration:underline;text-underline-offset:2px">お問い合わせ</a>ください。
+          </p>
+        </div>
+      </div>
+
+      <div class="flow-step fade-up">
+        <div class="flow-step__left">
+          <div class="flow-step__num">02</div>
+          <div class="flow-step__line"></div>
+        </div>
+        <div class="flow-step__body">
+          <h3 class="flow-step__title">ご希望の確認</h3>
+          <p class="flow-step__desc">
+            メールまたは電話にて、ご要望を最終確認させていただきます。まだ決まっていないことがございましたら、この段階でお気軽にご相談ください。
+          </p>
+        </div>
+      </div>
+
+      <div class="flow-step fade-up">
+        <div class="flow-step__left">
+          <div class="flow-step__num">03</div>
+          <div class="flow-step__line"></div>
+        </div>
+        <div class="flow-step__body">
+          <h3 class="flow-step__title">基本設定の実施</h3>
+          <p class="flow-step__desc">
+            ご確認いただいた内容をもとに、リモートで基本的なセキュリティ設定を実施します。必須項目を順番に適用し、各工程で動作確認を行います。
+          </p>
+          <div class="flow-step__note">
+            <span aria-hidden="true">💡</span>
+            <span>100%オンサイト作業（御社への訪問）も対応しておりますが、有料オプションとなります。詳細は<a href="#options">オプション一覧</a>をご確認ください。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step fade-up">
+        <div class="flow-step__left">
+          <div class="flow-step__num">04</div>
+          <div class="flow-step__line"></div>
+        </div>
+        <div class="flow-step__body">
+          <h3 class="flow-step__title">御社への訪問と操作説明</h3>
+          <p class="flow-step__desc">
+            御社のオフィスにお伺いし、設定内容の説明と操作案内を行います。サーバーへの接続方法・日常的な管理操作・注意事項などをその場でご確認いただけます。
+          </p>
+          <div class="flow-step__note">
+            <span aria-hidden="true">📍</span>
+            <span>訪問対応エリアについては<a href="#area">こちら</a>をご確認ください。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step fade-up">
+        <div class="flow-step__left">
+          <div class="flow-step__num">05</div>
+          <div class="flow-step__line"></div>
+        </div>
+        <div class="flow-step__body">
+          <h3 class="flow-step__title">ご精算</h3>
+          <p class="flow-step__desc">
+            お支払い前に、実施した作業内容をお客様と確認し、「作業完了確認書」にご署名いただきます。お支払いは訪問時の現金、または銀行振り込みのいずれにも対応しています。振り込みの場合はご入金確認後に次のステップへ進みます。
+          </p>
+        </div>
+      </div>
+
+      <div class="flow-step flow-step--last fade-up">
+        <div class="flow-step__left">
+          <div class="flow-step__num flow-step__num--final">06</div>
+        </div>
+        <div class="flow-step__body">
+          <h3 class="flow-step__title">アクセス情報のお渡し</h3>
+          <p class="flow-step__desc">
+            お支払いの確認が取れた時点で、サーバーへのアクセスに必要な情報（SSHキー・ポート番号・ユーザー名など）を安全な方法でお渡しします。
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     訪問可能なエリア
+============================================================ -->
+<section class="section" id="area">
+  <div class="container">
+    <div class="area__header">
+      <div>
+        <div class="section-label fade-up">訪問対応エリア</div>
+        <h2 class="section-title fade-up">訪問可能な<em>エリア</em></h2>
+      </div>
+      <p class="section-subtitle fade-up">
+        エリア外の場合もリモートでの対応が可能です。まずはご相談ください。
+      </p>
+    </div>
+
+    <div class="area__grid fade-up">
+      <div class="area-card area-card--primary">
+        <div class="area-card__pref">
+          <span class="area-card__pref-name">東京都</span>
+          <span class="area-card__badge area-card__badge--free">出張費無料</span>
+        </div>
+        <ul class="area-card__cities">
+          <li><span class="city-dot" aria-hidden="true"></span><span class="city-name">23区 <span class="city-sub">（全区対応）</span></span></li>
+          <li><span class="city-dot" aria-hidden="true"></span><span class="city-name">多摩市</span></li>
+          <li><span class="city-dot" aria-hidden="true"></span><span class="city-name">八王子市</span></li>
+          <li><span class="city-dot" aria-hidden="true"></span><span class="city-name">川崎市</span></li>
+          <li><span class="city-dot" aria-hidden="true"></span><span class="city-name">日野市</span></li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <div class="area-card__pref">
+          <span class="area-card__pref-name">神奈川県</span>
+          <span class="area-card__badge area-card__badge--fee">出張費発生</span>
+        </div>
+        <ul class="area-card__fees">
+          <li><span>納品訪問のみ</span><strong>¥10,000</strong></li>
+          <li><span>100%オンサイト作業</span><strong>¥50,000</strong></li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <div class="area-card__pref">
+          <span class="area-card__pref-name">埼玉県</span>
+          <span class="area-card__badge area-card__badge--fee">出張費発生</span>
+        </div>
+        <ul class="area-card__fees">
+          <li><span>納品訪問のみ</span><strong>¥10,000</strong></li>
+          <li><span>100%オンサイト作業</span><strong>¥50,000</strong></li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <div class="area-card__pref">
+          <span class="area-card__pref-name">千葉県</span>
+          <span class="area-card__badge area-card__badge--fee">出張費発生</span>
+        </div>
+        <ul class="area-card__fees">
+          <li><span>納品訪問のみ</span><strong>¥10,000</strong></li>
+          <li><span>100%オンサイト作業</span><strong>¥50,000</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section class="section section--alt" id="faq">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-label fade-up" style="justify-content:center">よくある質問</div>
+      <h2 class="section-title fade-up" style="text-align:center">お客様からの<em>よくあるご質問</em></h2>
+    </div>
+
+    <div class="faq__list fade-up">
+
+      <div class="faq-item open" id="faq-providers">
+        <button class="faq-item__q" aria-expanded="true">
+          どのVPSプロバイダーに対応していますか？
+          <span class="faq-item__icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-item__a">
+          <p>基本的にはXServer VPSとConoHa VPSのみ完全対応しており、1営業日以内の作業完了をお約束します。プロバイダーによって手順が異なる場合があり、予期しない初期設定が含まれていたり、不具合によって作業が中断し、サポートとのやりとりに時間がかかることもございます。あらかじめご了承ください。</p>
+        </div>
+      </div>
+
+      <div class="faq-item open">
+        <button class="faq-item__q" aria-expanded="true">
+          アクセス情報を渡すことへのセキュリティ上の懸念は？
+          <span class="faq-item__icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-item__a">
+          <p>いかなる情報共有にもリスクは伴いますが、適切なセキュリティ対策を講じた上で共有いたします。SSHキーやパスワードはパスワードマネージャーのファイル共有機能を使用し、暗号化を活用します。</p>
+        </div>
+      </div>
+
+      <div class="faq-item open">
+        <button class="faq-item__q" aria-expanded="true">
+          納品後に設定内容を自分で変更できますか？
+          <span class="faq-item__icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-item__a">
+          <p>はい、もちろんです。納品後は御社のVPSとなりますので、自由にご利用いただけます。ただし、納品後に行われた操作の責任は御社が負うこととなります。弊社では納品後の操作結果に関するサポートを行っておりませんので、あらかじめご了承ください。</p>
+        </div>
+      </div>
+
+      <div class="faq-item open">
+        <button class="faq-item__q" aria-expanded="true">
+          複数台のVPSをまとめて依頼できますか？
+          <span class="faq-item__icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-item__a">
+          <p>はい、可能です。台数が多い場合はボリュームディスカウントも行いますので、まずはご相談ください。</p>
+        </div>
+      </div>
+
+      <div class="faq-item open">
+        <button class="faq-item__q" aria-expanded="true">
+          Ubuntu以外のLinuxディストリビューションにも対応できますか？
+          <span class="faq-item__icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-item__a">
+          <p>現時点ではUbuntuのみの設定代行を提供しております。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CTA
+============================================================ -->
+<section class="section section--dark cta-section" id="contact">
+  <div class="container">
+    <div class="cta__inner fade-up">
+      <div class="cta__label">お問い合わせ・お申し込み</div>
+      <h2 class="cta__title">まず、<em>お気軽に</em><br>ご連絡ください。</h2>
+      <p class="cta__sub">準備が整いましたら、こちらからお申し込みいただけます。</p>
+      <p class="cta__inquiry-text">お申し込みの前にご確認されたいことはございますか？<br>お気軽にお問い合わせください。</p>
+      <div class="cta__actions">
+        <a href="https://forms.gle/nW5vjAwxWC3CvA8W7" class="cta__btn-primary">申し込む</a>
+        <a href="https://forms.gle/agfsLsqEhjm7JnG78" class="cta__btn-secondary">問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <div class="footer__brand">
+          <span class="footer__brand-icon" aria-hidden="true">⬡</span>
+          <a href="https://yamato-daiwa.com/" style="color:inherit">株式会社ヤマトダイワ</a>
+        </div>
+        <p class="footer__desc">
+          Ubuntu VPSの初期設定を専門とするエンジニアチームです。
+          セキュリティと運用効率を両立したサーバー環境の構築を支援します。
+        </p>
+      </div>
+      <div>
+        <p class="footer__col-title">サービス</p>
+        <ul class="footer__links">
+          <li><a href="#required">主な作業</a></li>
+          <li><a href="#options">必須項目・オプション</a></li>
+          <li><a href="#flow">導入の流れ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">サポート</p>
+        <ul class="footer__links">
+          <li><a href="#faq">よくある質問</a></li>
+          <li><a href="#area">訪問可能なエリア</a></li>
+          <li><a href="https://forms.gle/agfsLsqEhjm7JnG78">お問い合わせ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">ポリシー</p>
+        <ul class="footer__links">
+          <li><a href="https://yamato-daiwa.com/privacy_policy">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2023 Yamato Daiwa Co. Ltd. All rights reserved.</p>
+      <p class="footer__trademark"><span style="color:var(--orange)">⬡</span> Ubuntu is a registered trademark of Canonical Ltd.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="./CommercialActivity/Services/UbuntuVPS_Setup/UbuntuVPS_SetupServicePage.js"></script>
+</body>
+</html>
